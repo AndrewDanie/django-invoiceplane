@@ -1,22 +1,25 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>invoicelike</title>
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 <body>
-    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
-
+    <header>
+    </header>
+    <script src="{% static 'js/script.js' %}"></script>
     <div class="container">
-        <div class="row">
-            <div class="col">1я колонка</div>
-            <div class="col">2я колонка</div>
-            <div class="col">3я колонка</div>
-            <div class="col">4я колонка</div>
+        <div class="row-auto d-flex justify-content-center">
+            {% for table in user_tables %}
+                {% include 'djangoinvoicelike/user_table.html' with table=table%}
+            {% endfor %}
         </div>
     </div>
+
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 </body>
 </html>
