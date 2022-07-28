@@ -1,10 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 </head>
 <body>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 
+    <div class="container">
+        <div class="row">
+            <div class="col">1я колонка</div>
+            <div class="col">2я колонка</div>
+            <div class="col">3я колонка</div>
+            <div class="col">4я колонка</div>
+        </div>
+    </div>
 </body>
 </html>
