@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class Dashboard_set(models.Model):
+
+    name = models.CharField(verbose_name='Имя дашборда', max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class Vehicle(models.Model):
 
     brand = models.CharField(verbose_name='Марка', max_length=200)

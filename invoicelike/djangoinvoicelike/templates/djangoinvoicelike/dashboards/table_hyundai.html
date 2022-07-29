@@ -1,0 +1,38 @@
+{% load static %}
+<div class="m-4 tablebox rounded">
+    <div class="d-flex back-color">
+        <div class="p-1"><img src='{% static "img/table.svg" %}'></div>
+        <div class="p-2"><strong>Автомобили Hyundai</strong></div>
+        <div class="ms-auto p-1">
+            <button type="button"
+                    class="btn-close btn-primary"
+                    aria-label="Close"
+                    onclick="delete_current_table(this);">
+            </button>
+        </div>
+    </div>
+    <table class="table table-hover table-sm">
+                    <thead class="back-color">
+                        {% for name in names %}
+                            <th class="p-2">{{ name }}</th>
+                        {% endfor %}
+                    </thead>
+        <tbody>
+        {{ dashtype }}
+                {% for element in carset %}
+                    {% if element.brand == 'Hyundai' %}
+                        <tr>
+                            <td><div>{{ element.brand }}</div></td>
+                            <td>{{ element.model }}</td>
+                            <td>{{ element.price }}₽</td>
+                            <td>{{ element.power }} лс</td>
+                            <td>{{ element.colour }}</td>
+                            <td align="center" class="text-primary">{{ element.release_date |date:"d.m.Y" }}</td>
+                            <td align="center" class="text-primary">{{ element.delivery_date |date:"d.m.Y" }}</td>
+                            <td align="center" class="text-primary">{{ element.sale_date |date:"d.m.Y" }}</td>
+                        </tr>
+                    {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

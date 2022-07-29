@@ -14,8 +14,8 @@
     <script src="{% static 'js/script.js' %}"></script>
     <div class="container">
         <div class="row-auto d-flex justify-content-center">
-            {% for table in user_tables %}
-                {% include 'djangoinvoicelike/user_table.html' with table=table%}
+            {% for dash_type in dash_types %}
+                {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type carset=carset names=names%}
             {% endfor %}
         </div>
     </div>

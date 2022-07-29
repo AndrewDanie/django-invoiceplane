@@ -1,0 +1,29 @@
+{% load static %}
+
+
+
+{% if dash_type == 'Таблица автомобилей' %}
+    {% include 'djangoinvoicelike/dashboards/table_full_carset.html' with carset=carset names=names %}
+
+{% elif dash_type == 'Продано за последний год' %}
+    {% include 'djangoinvoicelike/dashboards/table_last_year_sales.html' with carset=carset names=names %}
+
+{% elif dash_type == 'Проданные Hyundai' %}
+    {% include 'djangoinvoicelike/dashboards/table_hyundai.html' with carset=carset names=names %}
+
+{% elif dash_type == 'Выручка по годам' %}
+    {% include 'djangoinvoicelike/dashboards/list_income_by_years.html' with carset=carset names=names %}
+
+{% elif dash_type == 'Количество автомобилей по маркам' %}
+    {% include 'djangoinvoicelike/dashboards/list_car_amount_by_brand.html' with carset=carset names=names %}
+
+{% elif dash_type == 'Проданные автомобили по месяцам' %}
+    {% include 'djangoinvoicelike/dashboards/chart_sold_cars_by_mounths.html' with carset=carset names=names %}
+
+{% elif dash_type == 'Поступление автомобилей KIA по годам' %}
+    {% include 'djangoinvoicelike/dashboards/chart_kia_delivery_by_years.html' with carset=carset names=names %}
+
+{% else %}
+    {% include 'djangoinvoicelike/dashboards/404_dashboard.html' with carset=carset names=names %}
+
+{% endif %}
