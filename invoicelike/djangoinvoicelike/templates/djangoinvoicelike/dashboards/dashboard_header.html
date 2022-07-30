@@ -1,0 +1,18 @@
+{% load static %}
+<div class="d-flex back-color">
+    {% if icon == 'table' %}
+        <div class="p-1"><img src='{% static "img/table.svg" %}'></div>
+    {% elif icon == 'list' %}
+        <div class="p-1"><img src='{% static "img/list.svg" %}'></div>
+    {% elif icon == 'graph-up' %}
+        <div class="p-1"><img src='{% static "img/graph-up.svg" %}'></div>
+            {% endif %}
+    <div class="p-2"><strong>{{ name }}</strong></div>
+    <div class="ms-auto p-1">
+        <button type="button"
+                class="btn-close btn-primary"
+                aria-label="Close"
+                onclick="delete_current_table(this);">
+        </button>
+    </div>
+</div>

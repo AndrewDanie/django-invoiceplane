@@ -12,11 +12,15 @@
     <header>
     </header>
     <script src="{% static 'js/script.js' %}"></script>
-    <div class="container">
-        <div class="row-auto d-flex justify-content-center">
-            {% for dash_type in dash_types %}
-                {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type carset=carset names=names%}
-            {% endfor %}
+    <div class="container-md">
+        <div class="row">
+            <div>
+                {% for dash_type in dash_types %}
+                    <div class="m-4 tablebox rounded col-12">
+                            {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type carset=carset names=names%}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

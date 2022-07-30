@@ -8,7 +8,6 @@ def main_page(request):
     dash_types = []
     for dashboard in user_dashboards:
         dash_types.append(dashboard.name)
-    print(dash_types)
 
     carset = Vehicle.objects.all()
     names = [f.verbose_name.title() for f in Vehicle._meta.get_fields()][1:]
