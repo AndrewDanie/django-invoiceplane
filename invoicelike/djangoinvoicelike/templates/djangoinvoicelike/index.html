@@ -8,9 +8,44 @@
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
+
 <body>
     <header>
+        <div class="container p-4">
+            <div class="d-flex justify-content-around bg-light rounded m-4 col-12">
+                <div class="p-2 dropdown bg-light">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Новая таблица
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Таблица автомобилей</a>
+                        <a class="dropdown-item" href="#">Авто Hyundai</a>
+                        <a class="dropdown-item" href="#">Продажи за последний год</a>
+                      </div>
+                </div>
+                <div class="p-2 dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Новый список
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Выручка с продаж</a>
+                        <a class="dropdown-item" href="#">Количество автомобилей по маркам</a>
+                      </div>
+                </div>
+                <div class="p-2 dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Новый график
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Проданные автомобили по месяцам</a>
+                        <a class="dropdown-item" href="#">Поступление KIA по годам</a>
+                      </div>
+                </div>
+                </div>
+            </div>
+        </div>
     </header>
+
     <script src="{% static 'js/script.js' %}"></script>
     <div class="container-md">
         <div class="row">

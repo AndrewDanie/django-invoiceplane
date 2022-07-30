@@ -1,5 +1,7 @@
+from django.db.models import Count
 from django.shortcuts import render
 from .models import *
+import datetime
 
 
 def main_page(request):
@@ -9,10 +11,14 @@ def main_page(request):
     for dashboard in user_dashboards:
         dash_types.append(dashboard.name)
 
-    carset = Vehicle.objects.all()
+    data = {}
+    data['carset'] = Vehicle.objects.all()
+    data['last_year'] = Vehicle.objects.filter(sale_date__gte=datetime.date(2022, 1, 1)).order_by('sale_date')
     names = [f.verbose_name.title() for f in Vehicle._meta.get_fields()][1:]
+    data['income'] = Vehicle.objects.values('sale_date', 'price').order_by('sale_date')
+
     return render(request, 'djangoinvoicelike/index.html',
-                  {'carset': carset,
+                  {'data': data,
                    'names': names,
                    'dash_types': dash_types}
                   )
