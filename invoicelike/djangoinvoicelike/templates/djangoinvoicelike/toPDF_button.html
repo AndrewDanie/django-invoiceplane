@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="p-1" align="right">
+<form method="POST" >
+    {% csrf_token %}
+    <button
+            class="btn back-colour"
+            aria-label="Close"
+            name="to-pdf-dash-button"
+            value="{{ dash_type.name }}"
+            type="submit">
+        <div class="m-2">
+            Конвертировать в
+            <img src='{% static "img/filetype-pdf.svg" %} ' width="20" height="20" >
+        </div>
+    </button>
+</form>
+</div>

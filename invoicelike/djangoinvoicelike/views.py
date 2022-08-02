@@ -3,28 +3,13 @@ from django.db.models.functions import TruncYear, TruncMonth
 from django.shortcuts import render
 from .models import *
 import datetime
+from .toPDF import render_to_pdf
 
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
 
 
 def main_page(request):
-    if request.method == 'POST':
-        if request.POST.get("del-dash-button"):
-            pk = request.POST['del-dash-button']
-            try:
-                dash_to_delete = Dashboard_set.objects.get(pk=pk)
-                print(dash_to_delete)
-                dash_to_delete.delete()
-            except:
-                pass
-
-        if request.POST.get("new-dash-button"):
-            dash_name = request.POST['new-dash-button']
-            new_dash = Dashboard_set(name=dash_name)
-            new_dash.save()
-            print('Создать', new_dash)
-
     user_dashboards = Dashboard_set.objects.all()
 
     carset = Vehicle.objects.all()
@@ -59,8 +44,8 @@ def main_page(request):
                     output_type='div')
 
     names = [f.verbose_name.title() for f in Vehicle._meta.get_fields()][1:]
-    return render(request, 'djangoinvoicelike/index.html',
-                  {'carset': carset,
+
+    context = {'carset': carset,
                    'income': income,
                    'last_year': last_year,
                    'car_amount_by_brand': car_amount_by_brand,
@@ -68,4 +53,28 @@ def main_page(request):
                    'dash_types': user_dashboards,
                    'plot_sold_cars': plot_sold_cars,
                    'plot_kia': plot_kia,
-                })
+                }
+
+    if request.method == 'POST':
+        if request.POST.get("del-dash-button"):
+            pk = request.POST['del-dash-button']
+            try:
+                dash_to_delete = Dashboard_set.objects.get(pk=pk)
+                print(dash_to_delete)
+                dash_to_delete.delete()
+            except:
+                pass
+
+        if request.POST.get("new-dash-button"):
+            dash_name = request.POST['new-dash-button']
+            new_dash = Dashboard_set(name=dash_name)
+            new_dash.save()
+            print('Создать', new_dash)
+
+        # if request.POST.get("to-pdf-dash-button"):
+        #     dash_type = request.POST['to-pdf-dash-button']
+        #     print(f'Конвертируем в pdf {dash_type}')
+        #     context['dash_type'] = dash_type
+        #     return render_to_pdf(context)
+
+    return render(request, 'djangoinvoicelike/index.html', context=context)
