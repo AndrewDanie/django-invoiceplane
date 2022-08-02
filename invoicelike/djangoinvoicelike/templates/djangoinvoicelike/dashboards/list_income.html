@@ -7,8 +7,8 @@
     <tbody>
         {% for element in income %}
             <tr class="">
-                <td>{{ element.sale_date.year }}</td>
-                <td>{{ element.price }}</td>
+                <td>{{ element.year.year }} год</td>
+                <td>{{ element.price__sum }}₽</td>
             </tr>
         {% endfor %}
     </tbody>

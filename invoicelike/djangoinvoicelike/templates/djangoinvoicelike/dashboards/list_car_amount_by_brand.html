@@ -1,1 +1,16 @@
 {% load static %}
+
+<table class="table table-hover table-sm">
+    <thead class="back-color">
+            <th>Марка</th>
+            <th>Количество проданных автомоблей</th>
+    </thead>
+    <tbody>
+        {% for brand in car_amount_by_brand %}
+            <tr class="">
+                <td>{{ brand.brand }}</td>
+                <td>{{ brand.id__count }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,11 +1,11 @@
-from django.db.models import Count
+from django.db.models import Count, Sum
+from django.db.models.functions import TruncYear, TruncMonth
 from django.shortcuts import render
 from .models import *
 import datetime
 
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
-
 
 
 def main_page(request):
@@ -27,26 +27,43 @@ def main_page(request):
 
     user_dashboards = Dashboard_set.objects.all()
 
-    data = {}
-    data['carset'] = Vehicle.objects.all()
-    data['last_year'] = Vehicle.objects.filter(sale_date__gte=datetime.date(2022, 1, 1)).order_by('sale_date')
-    names = [f.verbose_name.title() for f in Vehicle._meta.get_fields()][1:]
-    data['income'] = Vehicle.objects.values('sale_date', 'price').order_by('sale_date')
+    carset = Vehicle.objects.all()
+    last_year = Vehicle.objects.filter(sale_date__gte=datetime.date(2022, 1, 1)).order_by('sale_date')
+    income = Vehicle.objects.values(year=TruncYear('sale_date')).annotate(Sum('price')).order_by('year')
+    car_amount_by_brand = Vehicle.objects.values('brand').annotate(Count('id'))
 
-    x_data = [0, 1, 2, 3]
-    y_data = [x ** 2 for x in x_data]
-    plot_sold_cars = plot([Scatter(x=x_data, y=y_data,
-                             mode='lines', name='test',
-                             opacity=0.9, marker_color='green')],
+    sold_cars_month = Vehicle.objects.\
+                    values(month=TruncMonth('sale_date')).\
+                    annotate(Count('id')).\
+                    order_by('month')
+    plot_sold_cars = plot([Scatter(x=[month['month'] for month in sold_cars_month],
+                                   y=[month['id__count'] for month in sold_cars_month],
+                            mode='markers+lines',
+                            marker=dict(color='LightSkyBlue', size=12, line=dict(color='MediumPurple', width=2)),
+                            name='test',
+                            opacity=0.9
+                         )],
+                        output_type='div')
+
+    kia_delivery = Vehicle.objects\
+                    .values(year=TruncYear('delivery_date'))\
+                    .annotate(Count('id'))\
+                    .order_by('year')
+    plot_kia = plot([Scatter(x=[car['year'] for car in kia_delivery],
+                             y=[car['id__count'] for car in kia_delivery],
+                       mode='markers+lines',
+                       marker=dict(color='LightSkyBlue', size=12, line=dict(color='MediumPurple', width=2)),
+                       name='test',
+                       opacity=0.9,
+                    )],
                     output_type='div')
 
-    plot_kia = plot([Scatter(x=x_data, y=y_data,
-                                   mode='lines', name='test',
-                                   opacity=0.9, marker_color='green')],
-                          output_type='div')
-
+    names = [f.verbose_name.title() for f in Vehicle._meta.get_fields()][1:]
     return render(request, 'djangoinvoicelike/index.html',
-                  {'data': data,
+                  {'carset': carset,
+                   'income': income,
+                   'last_year': last_year,
+                   'car_amount_by_brand': car_amount_by_brand,
                    'names': names,
                    'dash_types': user_dashboards,
                    'plot_sold_cars': plot_sold_cars,

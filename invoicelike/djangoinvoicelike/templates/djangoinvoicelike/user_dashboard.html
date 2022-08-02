@@ -3,32 +3,32 @@
 
 
 {% if dash_type == 'Автомобили' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='table' %}
-    {% include 'djangoinvoicelike/dashboards/table_full_carset.html' with carset=data.carset names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='table' %}
+    {% include 'djangoinvoicelike/dashboards/table_full_carset.html' %}
 
 {% elif dash_type == 'Продано за последний год' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='table' %}
-    {% include 'djangoinvoicelike/dashboards/table_last_year_sales.html' with carset=data.last_year names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='table' %}
+    {% include 'djangoinvoicelike/dashboards/table_last_year_sales.html' with carset=last_year %}
 
 {% elif dash_type == 'Проданные Hyundai' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='table' %}
-    {% include 'djangoinvoicelike/dashboards/table_hyundai.html' with carset=data.carset names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='table' %}
+    {% include 'djangoinvoicelike/dashboards/table_hyundai.html' %}
 
 {% elif dash_type == 'Выручка с продаж' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='list' %}
-    {% include 'djangoinvoicelike/dashboards/list_income.html' with income=data.income names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='list' %}
+    {% include 'djangoinvoicelike/dashboards/list_income.html' %}
 
 {% elif dash_type == 'Количество автомобилей по маркам' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='list' %}
-    {% include 'djangoinvoicelike/dashboards/list_car_amount_by_brand.html' with carset=data.carset names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='list' %}
+    {% include 'djangoinvoicelike/dashboards/list_car_amount_by_brand.html' %}
 
 {% elif dash_type == 'Проданные автомобили по месяцам' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='graph-up' %}
-    {% include 'djangoinvoicelike/dashboards/chart_sold_cars_by_mounths.html' with plot_sold_cars=plot_sold_cars names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='graph-up' %}
+    {% include 'djangoinvoicelike/dashboards/chart_sold_cars_by_mounths.html' %}
 
 {% elif dash_type == 'Поступление KIA по годам' %}
-    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='graph-up' %}
-    {% include 'djangoinvoicelike/dashboards/chart_kia_delivery_by_years.html' with plot_kia=plot_kia names=names %}
+    {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type icon='graph-up' %}
+    {% include 'djangoinvoicelike/dashboards/chart_kia_delivery_by_years.html' %}
 
 {% else %}
     {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name='404 not found' %}
