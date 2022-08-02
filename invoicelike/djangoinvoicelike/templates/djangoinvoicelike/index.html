@@ -64,7 +64,7 @@
             <div>
                 {% for dash_type in dash_types %}
                     <div class="mb-5 tablebox rounded col-12">
-                            {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type.name pk=dash_type.pk carset=carset names=names%}
+                            {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type.name pk=dash_type.pk %}
                     </div>
                 {% endfor %}
             </div>

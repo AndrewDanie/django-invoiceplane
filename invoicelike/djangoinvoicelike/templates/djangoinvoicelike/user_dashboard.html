@@ -24,11 +24,11 @@
 
 {% elif dash_type == 'Проданные автомобили по месяцам' %}
     {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='graph-up' %}
-    {% include 'djangoinvoicelike/dashboards/chart_sold_cars_by_mounths.html' with carset=data.carset names=names %}
+    {% include 'djangoinvoicelike/dashboards/chart_sold_cars_by_mounths.html' with plot_sold_cars=plot_sold_cars names=names %}
 
 {% elif dash_type == 'Поступление KIA по годам' %}
     {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name=dash_type pk=pk icon='graph-up' %}
-    {% include 'djangoinvoicelike/dashboards/chart_kia_delivery_by_years.html' with carset=data.carset names=names %}
+    {% include 'djangoinvoicelike/dashboards/chart_kia_delivery_by_years.html' with plot_kia=plot_kia names=names %}
 
 {% else %}
     {% include 'djangoinvoicelike/dashboards/dashboard_header.html' with name='404 not found' %}
