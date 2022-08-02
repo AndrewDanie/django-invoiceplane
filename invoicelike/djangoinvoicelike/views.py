@@ -5,11 +5,20 @@ import datetime
 
 
 def main_page(request):
+    if request.method == 'POST':
+        if request.POST.get("del-dash-button"):
+            pk = request.POST['del-dash-button']
+            dash_to_delete = Dashboard_set.objects.get(pk=pk)
+            print(dash_to_delete)
+            dash_to_delete.delete()
+
+        if request.POST.get("new-dash-button"):
+            dash_name = request.POST['new-dash-button']
+            new_dash = Dashboard_set(name=dash_name)
+            new_dash.save()
+            print('Создать', new_dash)
 
     user_dashboards = Dashboard_set.objects.all()
-    dash_types = []
-    for dashboard in user_dashboards:
-        dash_types.append(dashboard.name)
 
     data = {}
     data['carset'] = Vehicle.objects.all()
@@ -20,5 +29,5 @@ def main_page(request):
     return render(request, 'djangoinvoicelike/index.html',
                   {'data': data,
                    'names': names,
-                   'dash_types': dash_types}
+                   'dash_types': user_dashboards}
                   )

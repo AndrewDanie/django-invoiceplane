@@ -1,0 +1,9 @@
+{% load static %}
+<li>
+    <form method="POST">
+        {% csrf_token %}
+        <button class="dropdown-item" name="new-dash-button" value="{{ name }}" type="submit">
+          {{ name }}
+        </button>
+    </form>
+</li>

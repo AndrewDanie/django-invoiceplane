@@ -9,10 +9,15 @@
             {% endif %}
     <div class="p-2"><strong>{{ name }}</strong></div>
     <div class="ms-auto p-1">
-        <button type="button"
-                class="btn-close btn-primary"
-                aria-label="Close"
-                onclick="delete_current_table(this);">
-        </button>
+        <form method="POST" >
+            {% csrf_token %}
+            <button
+                    class="btn-close btn-primary"
+                    aria-label="Close"
+                    name="del-dash-button"
+                    value="{{ pk }}"
+                    type="submit">
+            </button>
+        </form>
     </div>
 </div>

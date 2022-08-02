@@ -25,9 +25,9 @@
                     <strong style="color: White">ТАБЛИЦЫ</strong>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Все автомобили</a></li>
-                    <li><a class="dropdown-item" href="#">Автомобили Hyundai</a></li>
-                    <li><a class="dropdown-item" href="#">Продано за последний год</a></li>
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Автомобили' %}
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Проданные Hyundai' %}
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Продано за последний год' %}
                   </ul>
                 </li>
                   <li class="nav-item dropdown">
@@ -35,8 +35,8 @@
                     <strong style="color: White">СПИСКИ</strong>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Количество автомобилей по маркам</a></li>
-                    <li><a class="dropdown-item" href="#">Выручка с продаж</a></li>
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Количество автомобилей по маркам' %}
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Выручка с продаж' %}
                   </ul>
                 </li>
                   <li class="nav-item dropdown">
@@ -44,8 +44,8 @@
                     <strong style="color: White">ГРАФИКИ</strong>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Проданные автомобили по месяцам</a></li>
-                    <li><a class="dropdown-item" href="#">Поступление KIA по годам</a></li>
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Проданные автомобили по месяцам' %}
+                    {% include 'djangoinvoicelike/menu_button.html' with name='Поступление KIA по годам' %}
                   </ul>
                 </li>
               </ul>
@@ -64,7 +64,7 @@
             <div>
                 {% for dash_type in dash_types %}
                     <div class="mb-5 tablebox rounded col-12">
-                            {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type carset=carset names=names%}
+                            {% include 'djangoinvoicelike/user_dashboard.html' with dash_type=dash_type.name pk=dash_type.pk carset=carset names=names%}
                     </div>
                 {% endfor %}
             </div>
