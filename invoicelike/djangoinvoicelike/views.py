@@ -8,9 +8,12 @@ def main_page(request):
     if request.method == 'POST':
         if request.POST.get("del-dash-button"):
             pk = request.POST['del-dash-button']
-            dash_to_delete = Dashboard_set.objects.get(pk=pk)
-            print(dash_to_delete)
-            dash_to_delete.delete()
+            try:
+                dash_to_delete = Dashboard_set.objects.get(pk=pk)
+                print(dash_to_delete)
+                dash_to_delete.delete()
+            except:
+                pass
 
         if request.POST.get("new-dash-button"):
             dash_name = request.POST['new-dash-button']
