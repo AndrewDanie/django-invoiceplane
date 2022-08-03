@@ -17,49 +17,49 @@ def main_page(request):
     income = carset.values(year=TruncYear('sale_date')).annotate(Sum('price')).order_by('year')
     car_amount_by_brand = carset.values('brand').annotate(Count('id'))
 
-    sold_cars_month = Vehicle.objects.\
-                    values(month=TruncMonth('sale_date')).\
-                    annotate(Count('id')).\
-                    order_by('month')
+    sold_cars_month = carset \
+        .values(month=TruncMonth('sale_date')) \
+        .annotate(Count('id')) \
+        .order_by('month')
     plot_sold_cars = plot([Scatter(x=[month['month'] for month in sold_cars_month],
                                    y=[month['id__count'] for month in sold_cars_month],
-                            mode='markers+lines',
-                            marker=dict(color='LightSkyBlue', size=12, line=dict(color='MediumPurple', width=2)),
-                            name='test',
-                            opacity=0.9
-                         )],
-                        output_type='div')
+                                   mode='markers+lines',
+                                   marker=dict(color='LightSkyBlue', size=12, line=dict(color='MediumPurple', width=2)),
+                                   name='test',
+                                   opacity=0.9
+                                   )],
+                          output_type='div')
 
-    kia_delivery = Vehicle.objects\
-                    .values(year=TruncYear('delivery_date'))\
-                    .annotate(Count('id'))\
-                    .order_by('year')
+    kia_delivery = carset \
+        .values(year=TruncYear('delivery_date')) \
+        .annotate(Count('id')) \
+        .order_by('year')
     plot_kia = plot([Scatter(x=[car['year'] for car in kia_delivery],
                              y=[car['id__count'] for car in kia_delivery],
-                       mode='markers+lines',
-                       marker=dict(color='LightSkyBlue', size=12, line=dict(color='MediumPurple', width=2)),
-                       name='test',
-                       opacity=0.9,
-                    )],
+                             mode='markers+lines',
+                             marker=dict(color='LightSkyBlue', size=12, line=dict(color='MediumPurple', width=2)),
+                             name='test',
+                             opacity=0.9,
+                             )],
                     output_type='div')
 
     names = [f.verbose_name.title() for f in Vehicle._meta.get_fields()][1:]
 
     context = {'carset': carset,
-                   'income': income,
-                   'last_year': last_year,
-                   'car_amount_by_brand': car_amount_by_brand,
-                   'names': names,
-                   'dash_types': user_dashboards,
-                   'plot_sold_cars': plot_sold_cars,
-                   'plot_kia': plot_kia,
-                }
+               'income': income,
+               'last_year': last_year,
+               'car_amount_by_brand': car_amount_by_brand,
+               'names': names,
+               'dash_types': user_dashboards,
+               'plot_sold_cars': plot_sold_cars,
+               'plot_kia': plot_kia,
+               }
 
     if request.method == 'POST':
         if request.POST.get("del-dash-button"):
             pk = request.POST['del-dash-button']
             try:
-                dash_to_delete = Dashboard_set.objects.get(pk=pk)
+                dash_to_delete = user_dashboards.get(pk=pk)
                 print(dash_to_delete)
                 dash_to_delete.delete()
             except:
