@@ -11,11 +11,11 @@ from plotly.graph_objs import Scatter
 
 def main_page(request):
     user_dashboards = Dashboard_set.objects.all()
-
     carset = Vehicle.objects.all()
-    last_year = Vehicle.objects.filter(sale_date__gte=datetime.date(2022, 1, 1)).order_by('sale_date')
-    income = Vehicle.objects.values(year=TruncYear('sale_date')).annotate(Sum('price')).order_by('year')
-    car_amount_by_brand = Vehicle.objects.values('brand').annotate(Count('id'))
+
+    last_year = carset.filter(sale_date__gte=datetime.date(2022, 1, 1)).order_by('sale_date')
+    income = carset.values(year=TruncYear('sale_date')).annotate(Sum('price')).order_by('year')
+    car_amount_by_brand = carset.values('brand').annotate(Count('id'))
 
     sold_cars_month = Vehicle.objects.\
                     values(month=TruncMonth('sale_date')).\
